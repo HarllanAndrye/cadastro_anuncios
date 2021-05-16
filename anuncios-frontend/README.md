@@ -51,8 +51,8 @@ Isso irá iniciar o front-end no endereço `http://localhost:4200/`. A aplicaç�
   <img src="images/relatorio.png"/>
 </kbd>
 
-
-
+<br>
+<br>
 <br>
 
 > Tenho mais projetos :wink:, acesse [meu GitHub](https://github.com/HarllanAndrye).
