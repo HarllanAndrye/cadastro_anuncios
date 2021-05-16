@@ -1,0 +1,32 @@
+<form class="mt-4">
+    <div class="row">
+      <div class="form-group col">
+        <label for="nome">Nome do anúncio:</label>
+        <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="anuncio.name" placeholder="Anúncio">
+      </div>
+     
+      <div class="form-group col">
+        <label for="preco">Nome do cliente:</label>
+        <input type="text" class="form-control" id="preco" name="preco" [(ngModel)]="anuncio.clientName" placeholder="Cliente">
+      </div>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label for="dtInicio">Data de início:</label>
+            <input class="form-control" type="date" name="dtInicio" [(ngModel)]="anuncio.dataInicio" value="2021-05-01" id="dtInicio">
+        </div>
+       
+        <div class="form-group col">
+          <label for="dtTermino">Data de término:</label>
+          <input class="form-control" type="date" name="dtTermino" [(ngModel)]="anuncio.dataTermino" value="2021-05-01" id="dtTermino">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="invest">Investimento por dia:</label>
+          <input type="number" class="form-control" id="invest" name="invest" [(ngModel)]="anuncio.investimentoPorDia" placeholder="0,00">
+        </div>
+      </div>
+
+    <button type="submit" class="btn btn-outline-primary" (click)="saveAd()">Salvar</button>
+</form>

@@ -1,0 +1,36 @@
+<table class="table table-hover mt-5" *ngIf="showTable; else carregando">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Max. visualizações</th>
+        <th scope="col">Max. cliques</th>
+        <th scope="col">Max. compartilhamentos</th>
+        <th scope="col">Total investido</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let anuncio of anuncios">
+        <th scope="row">{{anuncio.idAnuncio}}</th>
+        <td>{{anuncio.nomeAnuncio}}</td>
+        <td>{{anuncio.nomeCliente}}</td>
+        <td>{{anuncio.maxVisualizacoes}}</td>
+        <td>{{anuncio.maxCliques}}</td>
+        <td>{{anuncio.maxCompartilhamentos}}</td>
+        <td>{{anuncio.totalInvestido | currency:'BRL'}}</td>
+      </tr>
+    </tbody>
+</table>
+
+<ng-template #carregando >
+    <div id="preloader">
+      <div class="inner">
+         <div class="bolas">
+            <div></div>
+            <div></div>
+            <div></div>                    
+         </div>
+      </div>
+  </div>
+</ng-template>
