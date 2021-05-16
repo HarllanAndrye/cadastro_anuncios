@@ -33,15 +33,24 @@ Isso irá iniciar o front-end no endereço `http://localhost:4200/`. A aplicaç�
 
 ### Home
 
-![Página inicial](images/home.png)
+<kbd>
+  <img src="images/home.png"/>
+</kbd>
+
 
 ### Cadastro
 
-![Cadastro](images/cadastro.png)
+<kbd>
+  <img src="images/cadastro.png"/>
+</kbd>
+
 
 ### Relatório
 
-![Relatório](images/relatorio.png)
+<kbd>
+  <img src="images/relatorio.png"/>
+</kbd>
+
 
 
 <br>
