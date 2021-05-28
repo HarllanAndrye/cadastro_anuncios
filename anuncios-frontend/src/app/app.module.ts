@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegisterAdComponent } from './register-ad/register-ad.component';
 import { ListAdComponent } from './list-ad/list-ad.component'
 import { AnunciosService } from './anuncios.service';
+
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import { AnunciosService } from './anuncios.service';
     ListAdComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [AnunciosService],
   bootstrap: [AppComponent]

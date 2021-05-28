@@ -38,7 +38,7 @@ export class RegisterAdComponent implements OnInit {
       investimentoPorDia: this.anuncio.investimentoPorDia
     };
 
-    this.anuncioService.inserir(dados).subscribe(
+    this.anuncioService.insertAd(dados).subscribe(
       success => {
         Swal.fire({
           position: 'center',

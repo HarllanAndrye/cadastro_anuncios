@@ -1,36 +1,89 @@
-<table class="table table-hover mt-5" *ngIf="showTable; else carregando">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Cliente</th>
-        <th scope="col">Max. visualizações</th>
-        <th scope="col">Max. cliques</th>
-        <th scope="col">Max. compartilhamentos</th>
-        <th scope="col">Total investido</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let anuncio of anuncios">
-        <th scope="row">{{anuncio.idAnuncio}}</th>
-        <td>{{anuncio.nomeAnuncio}}</td>
-        <td>{{anuncio.nomeCliente}}</td>
-        <td>{{anuncio.maxVisualizacoes}}</td>
-        <td>{{anuncio.maxCliques}}</td>
-        <td>{{anuncio.maxCompartilhamentos}}</td>
-        <td>{{anuncio.totalInvestido | currency:'BRL'}}</td>
-      </tr>
-    </tbody>
+<div class="accordion col-6 mt-5 float-right" id="filterDate">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Filtrar por período
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <form class="">
+          <div class="row row-space">
+            <div class="form-group col-6">
+                <label for="dtInicio">De:</label>
+                <input class="form-control" type="date" name="dtInicio" [(ngModel)]="datePeriod.start" id="dtInicio">
+            </div>
+            
+            <div class="form-group col-6">
+              <label for="dtTermino">Até:</label>
+              <input class="form-control" type="date" name="dtTermino" [(ngModel)]="datePeriod.end" id="dtTermino">
+            </div>
+          </div>
+          <div class="col-6 float-right mb-3 pr-0">
+            <div class="d-flex flex-row-reverse">
+              <button type="submit" class="btn btn-outline-primary w-100" (click)="getReportByPeriod()">Pesquisar</button>
+            </div>
+          </div>
+          <small class="text-danger">* Filtro por data de início do anúncio.</small>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<form class="mt-5">
+  <div class="form-group form-inline">
+      Pesquisar (Anúncio/Cliente): <input class="form-control ml-2" type="text" [formControl]="filter"/>
+  </div>
+</form>
+
+<table class="table table-hover mt-3" *ngIf="showTable; else carregando">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Nome</th>
+    <th scope="col">Cliente</th>
+    <th scope="col">Max. visualizações</th>
+    <th scope="col">Max. cliques</th>
+    <th scope="col">Max. compartilhamentos</th>
+    <th scope="col">Total investido</th>
+    <th scope="col">Início</th>
+    <th scope="col">Término</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let anuncio of anuncios | async; index as i">
+      <th scope="row">{{anuncio.idAnuncio}}</th>
+      <td>
+        <ngb-highlight [result]="anuncio.nomeAnuncio" [term]="filter.value"></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight [result]="anuncio.nomeCliente" [term]="filter.value"></ngb-highlight>
+      </td>
+      <td>{{anuncio.maxVisualizacoes}}</td>
+      <td>{{anuncio.maxCliques}}</td>
+      <td>{{anuncio.maxCompartilhamentos}}</td>
+      <td>{{anuncio.totalInvestido | currency:'BRL'}}</td>
+      <td>{{anuncio.startDate | date:'dd/MM/yyyy':'UTC'}}</td>
+      <td>{{anuncio.endDate | date:'dd/MM/yyyy':'UTC'}}</td>
+    </tr>
+  </tbody>
 </table>
 
+
 <ng-template #carregando >
-    <div id="preloader">
-      <div class="inner">
-         <div class="bolas">
-            <div></div>
-            <div></div>
-            <div></div>                    
-         </div>
-      </div>
-  </div>
+  <div id="preloader">
+    <div class="inner">
+       <div class="bolas">
+          <div></div>
+          <div></div>
+          <div></div>                    
+       </div>
+    </div>
+</div>
 </ng-template>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.harllan.anuncios.calculator.Calculator;
+import com.harllan.anuncios.dto.DatePeriodDTO;
 import com.harllan.anuncios.dto.RelatorioDTO;
 import com.harllan.anuncios.entities.Anuncio;
 import com.harllan.anuncios.exception.AnuncioAlreadyRegisteredException;
@@ -76,6 +77,11 @@ public class AnuncioService {
 	public List<RelatorioDTO> generateReport() {
 		Calculator c = new Calculator(anuncioRepository);
 		return c.report();
+	}
+
+	public List<RelatorioDTO> generateReportByPeriod(DatePeriodDTO period) {
+		Calculator c = new Calculator(anuncioRepository);
+		return c.reportByPeriod(period);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.harllan.anuncios.dto.DatePeriodDTO;
 import com.harllan.anuncios.dto.RelatorioDTO;
 import com.harllan.anuncios.entities.Anuncio;
 import com.harllan.anuncios.repository.AnuncioRepository;
@@ -18,7 +19,7 @@ public class Calculator {
 	private final AnuncioRepository anuncioRepository;
 	
 	/**
-     * Método que retona o relatório referente aos anúncios, informando: 
+     * Método que retorna o relatório referente aos anúncios, informando: 
      * 		valor total investido, quantidade máxima de visualizações, 
      * 		quantidade máxima de cliques, quantidade máxima de compartilhamentos. 
      * 
@@ -27,7 +28,35 @@ public class Calculator {
 	public List<RelatorioDTO> report()  {
 		List<Anuncio> anuncios = anuncioRepository.findAll();
 		
-        List<RelatorioDTO> relatorio = new ArrayList<>();
+		return generateReport(anuncios);
+    }
+	
+	/**
+     * Método que retorna o relatório por período referente a data de início dos anúncios, informando: 
+     * 		valor total investido, quantidade máxima de visualizações, 
+     * 		quantidade máxima de cliques, quantidade máxima de compartilhamentos. 
+     * 
+     * @param DatePeriodDTO period
+     * 
+     * @return List<RelatorioDTO>
+     */
+	public List<RelatorioDTO> reportByPeriod(DatePeriodDTO period) {
+		// A consulta retorna o(s) anúncio(s) quem tem a data de início dentro do período informado.
+		List<Anuncio> anuncios = anuncioRepository.findByDatePeriod(period.getStart(), period.getEnd());
+		
+		return generateReport(anuncios);
+	}
+	
+	
+	/**
+     * Método que retorna o relatório dos anúncios. 
+     * 
+     * @param List<Anuncio> anuncios
+     * 
+     * @return List<RelatorioDTO>
+     */
+	private List<RelatorioDTO> generateReport(List<Anuncio> anuncios) {
+		List<RelatorioDTO> relatorio = new ArrayList<>();
         
         for (Anuncio anuncio : anuncios) {
         	Integer days = qtdDays(anuncio.getDataInicio(), anuncio.getDataTermino());
@@ -70,15 +99,18 @@ public class Calculator {
             rel.setMaxVisualizacoes(qtdMaxVisualizacoes);
             rel.setMaxCliques(qtdCliques * days);
             rel.setMaxCompartilhamentos(qtdCompartilhamentos * days);
+            rel.setStartDate(anuncio.getDataInicio());
+            rel.setEndDate(anuncio.getDataTermino());
             
             relatorio.add(rel);
 		}
         
         return relatorio;
-    }
+	}
+	
 	
 	/**
-     * Método que retona a quantidade de dias entre uma data inicial e uma data final. 
+     * Método que retorna a quantidade de dias entre uma data inicial e uma data final. 
      * 
      * @param start
      * @param end
@@ -93,7 +125,7 @@ public class Calculator {
     }
 	
 	/**
-     * Método que retona a quantidade de novas visualizações de acordo com os cliques e compartilhamentos referentes as visualizações anteriores do anúncio. 
+     * Método que retorna a quantidade de novas visualizações de acordo com os cliques e compartilhamentos referentes as visualizações anteriores do anúncio. 
      * 
      * @param qtdVisualizacoesInicial
      * @return Integer
@@ -107,7 +139,7 @@ public class Calculator {
 	}
 	
 	/**
-     * Método que retona a quantidade de visualizações do anúncio. 
+     * Método que retorna a quantidade de visualizações do anúncio. 
      * 
      * @param qtdVisualizacao
      * @return Integer
@@ -117,7 +149,7 @@ public class Calculator {
     }
 
 	/**
-     * Método que retona a quantidade de cliques no anúncio. 
+     * Método que retorna a quantidade de cliques no anúncio. 
      * 
      * @param qtdClique
      * @return Integer
@@ -127,7 +159,7 @@ public class Calculator {
     }
     
     /**
-     * Método que retona a quantidade de compartilhamentos. 
+     * Método que retorna a quantidade de compartilhamentos. 
      * 
      * @param qtdCompartilhamento
      * @return Integer

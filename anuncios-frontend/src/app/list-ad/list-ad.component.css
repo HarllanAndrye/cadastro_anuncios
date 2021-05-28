@@ -53,3 +53,8 @@
     opacity: 1; 
   } 
 }
+
+
+#headingOne {
+  padding: inherit !important;
+}

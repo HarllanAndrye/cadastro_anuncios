@@ -2,6 +2,10 @@ package com.harllan.anuncios.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.harllan.anuncios.config.SwaggerConfig;
+import com.harllan.anuncios.dto.DatePeriodDTO;
 import com.harllan.anuncios.dto.RelatorioDTO;
 import com.harllan.anuncios.entities.Anuncio;
 import com.harllan.anuncios.exception.AnuncioAlreadyRegisteredException;
@@ -12,7 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api("Gerenciamento de anúncios")
+@Api(value = "Gerenciamento de anúncios", tags = { SwaggerConfig.TAG_1 })
 public interface AnuncioControllerDocs {
 	
 	@ApiOperation(value = "Retorna uma lista de anúncios registrados no sistema.")
@@ -34,6 +38,12 @@ public interface AnuncioControllerDocs {
     })
     public List<RelatorioDTO> getRelatorio();
 	
+	@ApiOperation(value = "Retorna uma lista dos relatórios dos anúncios registrados no sistema por período.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Relatório de anúncios registrados no sistema que tem a data de início dentro do período informado."),
+    })
+	public List<RelatorioDTO> getReportByDate(@RequestBody DatePeriodDTO period);
+	
 	@ApiOperation(value = "Cadastro de anúncio")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Sucesso caso anúncio criado no banco de dados."),
@@ -48,7 +58,7 @@ public interface AnuncioControllerDocs {
     })
     public Anuncio updateAnuncio(Long id, Anuncio anuncio) throws AnuncioNotFoundException;
 	
-	@ApiOperation(value = "Delete a beer found by a given valid Id")
+	@ApiOperation(value = "Exclui anúncio de acordo com Id fornecido.")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Anúncio excluído com sucesso."),
             @ApiResponse(code = 404, message = "Anúncio não foi encontrado.")

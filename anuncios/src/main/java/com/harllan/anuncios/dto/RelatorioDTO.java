@@ -1,5 +1,7 @@
 package com.harllan.anuncios.dto;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +20,7 @@ public class RelatorioDTO {
 	private Integer maxVisualizacoes;
 	private Integer maxCliques;
 	private Integer maxCompartilhamentos;
+	private Date startDate;
+	private Date endDate;
 
 }

@@ -19,6 +19,7 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
 	Optional<Anuncio> findByDataInicioBetween(Date start, Date end);
 	Optional<Anuncio> findByDataTerminoBetween(Date start, Date end);
 	
-	@Query("select u from Anuncio u where (:startDate between u.dataInicio and u.dataTermino) OR (:endDate between u.dataInicio and u.dataTermino)")
+	//@Query("select u from Anuncio u where (:startDate between u.dataInicio and u.dataTermino) OR (:endDate between u.dataInicio and u.dataTermino)")
+	@Query("select u from Anuncio u where (u.dataInicio between :startDate and :endDate)")
 	List<Anuncio> findByDatePeriod(@Param("startDate") Date start, @Param("endDate") Date end);
 }

@@ -6,4 +6,6 @@ export interface Relatorio {
     maxVisualizacoes: number;
     maxCliques: number;
     maxCompartilhamentos: number;
+    startDate: string;
+	endDate: string;
 }

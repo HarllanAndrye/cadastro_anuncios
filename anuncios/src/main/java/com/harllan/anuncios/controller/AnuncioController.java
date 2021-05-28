@@ -2,8 +2,11 @@ package com.harllan.anuncios.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.harllan.anuncios.dto.DatePeriodDTO;
 import com.harllan.anuncios.dto.RelatorioDTO;
 import com.harllan.anuncios.entities.Anuncio;
 import com.harllan.anuncios.exception.AnuncioAlreadyRegisteredException;
@@ -28,33 +32,38 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/anuncios")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class AnuncioController {
+public class AnuncioController implements AnuncioControllerDocs {
 	
 	private final AnuncioService anuncioService;
 	
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Anuncio> getAnuncios() {
         return anuncioService.listAll();
     }
 	
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Anuncio getAnuncio(@PathVariable Long id) throws AnuncioNotFoundException {
         return anuncioService.findById(id);
     }
 	
-	@GetMapping("/relatorios")
+	@GetMapping(value = "/relatorios", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RelatorioDTO> getRelatorio() {
 		return anuncioService.generateReport();
     }
 	
-	@PostMapping
+	@PostMapping(value = "/reports/date", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<RelatorioDTO> getReportByDate(@Valid @RequestBody DatePeriodDTO period) {
+		return anuncioService.generateReportByPeriod(period);
+    }
+	
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@CrossOrigin(origins = "http://localhost:4200")
     @ResponseStatus(HttpStatus.CREATED)
     public Anuncio createAnuncio(@RequestBody Anuncio anuncio) throws AnuncioAlreadyRegisteredException {
         return anuncioService.createAnuncio(anuncio);
     }
 	
-	@PutMapping("/{id}")
+	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Anuncio updateAnuncio(@PathVariable Long id, @RequestBody Anuncio anuncio) throws AnuncioNotFoundException {
         return anuncioService.modifyAnuncio(id, anuncio);
     }

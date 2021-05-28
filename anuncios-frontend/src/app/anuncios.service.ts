@@ -13,27 +13,31 @@ export class AnunciosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listar() {
+  getAll() {
     return this.httpClient.get<Anuncio[]>(this.API);
   }
 
-  listarRelatorios() {
+  getReports() {
     return this.httpClient.get<Relatorio[]>(`${this.API}/relatorios`);
   }
 
-  buscarPorId(id: any) {
+  getReportByPeriod(data: any) {
+    return this.httpClient.post<Relatorio[]>(`${this.API}/reports/date`, data);
+  }
+
+  findById(id: any) {
     return this.httpClient.get<Anuncio>(`${this.API}/${id}`);
   }
 
-  excluir(id: any) {
+  deleteAd(id: any) {
     return this.httpClient.delete(`${this.API}/${id}`);
   }
 
-  inserir(anuncio: Anuncio) {
-    return this.httpClient.post(this.API, anuncio);
+  insertAd(ad: Anuncio) {
+    return this.httpClient.post(this.API, ad);
   }
 
-  editar(anuncio: Anuncio) {
-    return this.httpClient.put(`${this.API}/${anuncio.id}`, anuncio);
+  updateAd(ad: Anuncio) {
+    return this.httpClient.put(`${this.API}/${ad.id}`, ad);
   }
 }

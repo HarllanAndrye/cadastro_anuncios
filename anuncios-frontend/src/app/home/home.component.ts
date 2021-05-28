@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnunciosService } from '../anuncios.service';
+import { Anuncio } from '../interface/anuncio';
 
 
 @Component({
@@ -9,9 +11,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private route: Router) { }
+  anuncios: Anuncio[] = [];
+
+  constructor(private anunciosService: AnunciosService, private route: Router) { }
 
   ngOnInit(): void {
+    this.anunciosService.getAll().subscribe(data => {
+      this.anuncios = data;
+    });
   }
 
 }

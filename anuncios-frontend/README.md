@@ -41,14 +41,14 @@ Isso irá iniciar o front-end no endereço `http://localhost:4200/`. A aplicaç�
 ### Cadastro
 
 <kbd>
-  <img src="images/cadastro.png"/>
+  <img src="images/register.png"/>
 </kbd>
 
 
 ### Relatório
 
 <kbd>
-  <img src="images/relatorio.png"/>
+  <img src="images/report.png"/>
 </kbd>
 
 <br>

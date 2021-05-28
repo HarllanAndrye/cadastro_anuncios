@@ -5,32 +5,47 @@
     <p>Acesse os menus para cadastrar um anúncio e ver o relatório.</p></div>
 </div>
 
-<style>
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400');
-</style>
-<ul>
-  <li>
-    <a href="https://www.linkedin.com/in/harllanandrye" target="_blank">
-      <i class="fa fa-linkedin" aria-hidden="true"></i>
-      <span> - LinkedIn</span>
-    </a>
-  </li>
-  <li>
-    <a href="https://github.com/HarllanAndrye" target="_blank">
-      <i class="fa fa-github" aria-hidden="true"></i>
-      <span> - GitHub</span>
-    </a>
-  </li>
-  <li>
-    <a href="mailto:harllanandrye@gmail.com">
-      <i class="fa fa-google" aria-hidden="true"></i>
-      <span> - E-mail</span>
-    </a>
-  </li>
-  <li>
-    <a href="https://www.instagram.com/harllanandrye/" target="_blank">
-      <i class="fa fa-instagram" aria-hidden="true"></i>
-      <span> - Instagram</span>
-    </a>
-  </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="card border-primary mb-3 card-ads" *ngFor="let anuncio of anuncios">
+      <div class="card-header"><b>{{anuncio.name}}</b></div>
+      <div class="card-body text-primary">
+        <h5 class="card-title">{{anuncio.clientName}}</h5>
+        <p class="card-text">Permanência: de {{anuncio.dataInicio | date:'dd/MM/yyyy':'UTC'}} até {{anuncio.dataTermino | date:'dd/MM/yyyy':'UTC'}}</p>
+        <p class="card-text">Investimento diário: {{anuncio.investimentoPorDia | currency:'BRL'}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 120px;">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400');
+    </style>
+    <ul>
+      <li>
+        <a href="https://www.linkedin.com/in/harllanandrye" target="_blank">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+          <span> - LinkedIn</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/HarllanAndrye" target="_blank">
+          <i class="fa fa-github" aria-hidden="true"></i>
+          <span> - GitHub</span>
+        </a>
+      </li>
+      <li>
+        <a href="mailto:harllanandrye@gmail.com">
+          <i class="fa fa-google" aria-hidden="true"></i>
+          <span> - E-mail</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/harllanandrye/" target="_blank">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+          <span> - Instagram</span>
+        </a>
+      </li>
+    </ul>
+</div>

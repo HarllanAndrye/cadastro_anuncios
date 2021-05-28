@@ -2,6 +2,8 @@ package com.harllan.anuncios.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -13,12 +15,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeriodoDTO {
+public class DatePeriodDTO {
 	
+	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date de;
+	private Date start;
 	
+	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date ate;
+	private Date end;
 
 }
